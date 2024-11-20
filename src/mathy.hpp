@@ -61,13 +61,13 @@ public:
     // Get y-coord
     Type y() const { return m_y; }
     // Get z-coord
-    Type y() const { return m_z; }
+    Type z() const { return m_z; }
     // Set x-coord
     void setX(const Type x) { m_x = x; }
     // Set y-coord
     void setY(const Type y) { m_y = y; }
     // Set z-coord
-    void setY(const Type z) { m_z = z; }
+    void setZ(const Type z) { m_z = z; }
 
     // Operator overloads
 

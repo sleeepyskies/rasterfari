@@ -1,5 +1,8 @@
-#include "mymath.hpp"
+#include "mathy.hpp"
+#include "model.hpp"
+#include "objparser.hpp"
 #include "tgaimage.hpp"
+#include <iostream>
 
 const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red   = TGAColor(255, 0, 0, 255);
@@ -35,11 +38,9 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
 }
 
 int main(int argc, char **argv) {
-    TGAImage img = TGAImage(100, 100, TGAImage::Format::RGB);
-    line(13, 20, 80, 40, img, white);
-    line(20, 13, 40, 80, img, red);
-    line(80, 40, 13, 20, img, red);
-    img.flip_vertically();
-    img.write_tga_file("output.tga");
+    Model model       = Model();
+    ObjParser oParser = ObjParser();
+    oParser.loadObj("../models/african_head.obj", model);
+
     return 0;
 }

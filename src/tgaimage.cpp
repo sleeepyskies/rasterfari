@@ -6,6 +6,7 @@
 #include <time.h>
 
 // Constructors
+// TODO: change from c style string to std::string
 
 TGAImage::TGAImage() : data(NULL), width(0), height(0), bytespp(0) {}
 
