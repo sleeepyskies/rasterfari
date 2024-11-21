@@ -85,8 +85,7 @@ int main(int argc, char **argv) {
              white);
     }
 
-    img.flip_vertically(); // i want to have the origin at the left bottom
-                           // corner of the image
+    img.flip_vertically();
     img.write_tga_file("output.tga");
     return 0;
 

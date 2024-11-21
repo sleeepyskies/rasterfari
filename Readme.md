@@ -1,4 +1,4 @@
-## Rendersome (wip name lol)
+## rasterfari
 Aiming to create a real time software rasterizer.
 
 ## Materials Used
