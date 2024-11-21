@@ -10,3 +10,4 @@ Aiming to create a real time software rasterizer.
 - add a logger
 - rework the tga parser
 - make obj parser able to parse all obj files
+- add SDL compatability
