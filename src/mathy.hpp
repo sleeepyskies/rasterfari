@@ -11,7 +11,7 @@ private:
 
 public:
     // Default constructor for 2D points, inits x and y to 0 if no params given
-    Vertex2(Type x = Type(0), Type y = Type(0)) : m_x(x), m_y(y) {}
+    explicit Vertex2(Type x = Type(0), Type y = Type(0)) : m_x(x), m_y(y) {}
 
     // Get x-coord
     Type x() const { return m_x; }
@@ -24,17 +24,17 @@ public:
 
     // Operator overloads
 
-    Vertex2<Type> operator+(const Vertex2 &other) const {
-        return Vertex2<Type>(this->x() + other->x(), this->y() + other->y());
+    Vertex2 operator+(const Vertex2 &other) const {
+        return Vertex2(this->x() + other->x(), this->y() + other->y());
     }
-    Vertex2<Type> operator-(const Vertex2 &other) const {
-        return Vertex2<Type>(this->x() - other->x(), this->y() - other->y());
+    Vertex2 operator-(const Vertex2 &other) const {
+        return Vertex2(this->x() - other->x(), this->y() - other->y());
     }
-    Vertex2<Type> operator*(const Vertex2 &other) const {
-        return Vertex2<Type>(this->x() * other->x(), this->y() * other->y());
+    Vertex2 operator*(const Vertex2 &other) const {
+        return Vertex2(this->x() * other->x(), this->y() * other->y());
     }
-    Vertex2<Type> operator/(const Vertex2 &other) const {
-        return Vertex2<Type>(this->x() / other->x(), this->y() / other->y());
+    Vertex2 operator/(const Vertex2 &other) const {
+        return Vertex2(this->x() / other->x(), this->y() / other->y());
     }
     bool operator==(const Vertex2 &other) const {
         return this->x() == other->x() && this->y() == other->y();
@@ -53,7 +53,7 @@ private:
 
 public:
     // Default constructor for 2D points, inits x and y to 0 if no params given
-    Vertex3(Type x = Type(0), Type y = Type(0), Type z = Type(0))
+    explicit Vertex3(Type x = Type(0), Type y = Type(0), Type z = Type(0))
         : m_x(x), m_y(y), m_z(z) {}
 
     // Get x-coord
@@ -71,25 +71,25 @@ public:
 
     // Operator overloads
 
-    Vertex3<Type> operator+(const Vertex3 &other) const {
-        return Vertex3<Type>(this->x() + other->x(),
-                             this->y() + other->y(),
-                             this->z() + other->z());
+    Vertex3 operator+(const Vertex3 &other) const {
+        return Vertex3(this->x() + other->x(),
+                       this->y() + other->y(),
+                       this->z() + other->z());
     }
-    Vertex3<Type> operator-(const Vertex3 &other) const {
-        return Vertex3<Type>(this->x() - other->x(),
-                             this->y() - other->y(),
-                             this->z() - other->z());
+    Vertex3 operator-(const Vertex3 &other) const {
+        return Vertex3(this->x() - other->x(),
+                       this->y() - other->y(),
+                       this->z() - other->z());
     }
-    Vertex3<Type> operator*(const Vertex3 &other) const {
-        return Vertex3<Type>(this->x() * other->x(),
-                             this->y() * other->y(),
-                             this->z() * other->z());
+    Vertex3 operator*(const Vertex3 &other) const {
+        return Vertex3(this->x() * other->x(),
+                       this->y() * other->y(),
+                       this->z() * other->z());
     }
-    Vertex3<Type> operator/(const Vertex3 &other) const {
-        return Vertex3<Type>(this->x() / other->x(),
-                             this->y() / other->y(),
-                             this->z() / other->z());
+    Vertex3 operator/(const Vertex3 &other) const {
+        return Vertex3(this->x() / other->x(),
+                       this->y() / other->y(),
+                       this->z() / other->z());
     }
     bool operator==(const Vertex3 &other) const {
         return this->x() == other->x() && this->y() == other->y() &&
@@ -101,7 +101,9 @@ public:
     }
 };
 
-using Vertex2f = Vertex2<float>; // 2D float vertex
-using Vertex2i = Vertex2<int>;   // 2D integer vertex
-using Vertex3f = Vertex3<float>; // 3D float vertex
-using Vertex3i = Vertex3<int>;   // 3D integer vertex
+using Vertex2f = Vertex2<float>;        // 2D float vertex
+using Vertex2i = Vertex2<int>;          // 2D integer vertex
+using Vertex2u = Vertex2<unsigned int>; // 2D unsigned integer vertex
+using Vertex3f = Vertex3<float>;        // 3D float vertex
+using Vertex3i = Vertex3<int>;          // 3D integer vertex
+using Vertex3u = Vertex3<unsigned int>; // 3D unsigned integer vertex
