@@ -7,7 +7,6 @@ Aiming to create a real time software rasterizer.
 - [scratchapixel](https://www.scratchapixel.com/index.html)
 
 ## TODO
-- add a logger
 - rework the tga parser
 - make obj parser able to parse all obj files
 - add SDL compatability
