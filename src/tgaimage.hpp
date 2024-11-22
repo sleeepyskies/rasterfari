@@ -53,6 +53,8 @@ struct TGAColor {
     TGAColor(unsigned char R, unsigned char G, unsigned char B, unsigned char A)
         : b(B), g(G), r(R), a(A), bytespp(4) {}
 
+    TGAColor(unsigned char L) : b(L), g(L), r(L), a(255.f), bytespp(4) {}
+
     TGAColor(int v, int bpp) : val(v), bytespp(bpp) {}
 
     TGAColor(const TGAColor &c) : val(c.val), bytespp(c.bytespp) {}

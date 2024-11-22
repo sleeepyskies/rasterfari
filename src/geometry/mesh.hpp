@@ -1,12 +1,13 @@
 #pragma once
 
+#include "item.hpp"
 #include "mathy.hpp"
 #include <vector>
 
 /**
  * A struct representing some model consisting of triangles.
  */
-struct Model {
+struct Mesh : public Item {
 private:
     // A vector holding all vertices in the model.
     std::vector<Vertex3f> m_vertices;
@@ -15,7 +16,7 @@ private:
 
 public:
     // Default constructor.
-    Model();
+    Mesh();
 
     // Adds a new vertex to the models list.
     void emplaceVertex(float x, float y, float z);

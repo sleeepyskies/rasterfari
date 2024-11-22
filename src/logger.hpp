@@ -93,6 +93,3 @@ public:
         Log("\x1b[41m[Fatal]\033[0m", LogLevel::Fatal, msg, args...);
     }
 };
-
-LogLevel Logger::m_level = LogLevel::Info; // Define and init level to Info
-std::mutex Logger::m_mutex;                // Init mutex

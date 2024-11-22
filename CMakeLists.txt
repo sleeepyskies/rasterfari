@@ -25,8 +25,13 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 file(GLOB SOURCES src/*.h src/*.cpp)
+# Include headers from src and src/geometry recursively (if needed)
+file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADERS ${CMAKE_SOURCE_DIR}/src/*.hpp)
+include_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/geometry)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 # Link SDL2 dynamically
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2)

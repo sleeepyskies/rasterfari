@@ -1,12 +1,11 @@
 #include "objparser.hpp"
-#include <limits>
 
-bool ObjParser::loadObj(const std::string &fileName, Model &model) {
+bool ObjParser::loadObj(const std::string &fileName, Mesh &mesh) {
     // create a new ifstream to read from .obj file
     std::ifstream in;
     in.open(fileName);
     if (in.fail()) { // opening the file failed
-        std::cout << "Could not open file " << fileName << std::endl;
+        Logger::Fatal("Could not load the file: ", fileName);
         return false;
     }
 
@@ -15,25 +14,25 @@ bool ObjParser::loadObj(const std::string &fileName, Model &model) {
     in >> token;
     while (in.good()) {
         if (token == "v") {
-            if (!readVertices(in, model, token)) {
+            if (!readVertices(in, mesh, token)) {
                 std::cout << "Encountered issue reading vertices " << fileName
                           << std::endl;
                 return false;
             }
         } else if (token == "vt") {
-            if (!readTextures(in, model, token)) {
+            if (!readTextures(in, mesh, token)) {
                 std::cout << "Encountered issue reading textures " << fileName
                           << std::endl;
                 return false;
             }
         } else if (token == "vn") {
-            if (!readNormals(in, model, token)) {
+            if (!readNormals(in, mesh, token)) {
                 std::cout << "Encountered issue reading normals " << fileName
                           << std::endl;
                 return false;
             }
         } else if (token == "f") {
-            if (!readFaces(in, model, token)) {
+            if (!readFaces(in, mesh, token)) {
                 std::cout << "Encountered issue reading faces " << fileName
                           << std::endl;
                 return false;
@@ -52,7 +51,7 @@ bool ObjParser::loadObj(const std::string &fileName, Model &model) {
     return true;
 }
 
-bool ObjParser::readVertices(std::ifstream &in, Model &model,
+bool ObjParser::readVertices(std::ifstream &in, Mesh &mesh,
                              std::string &token) {
     // assumes 3 float values for each vertex for now
     // also assumes no obj file issues
@@ -61,14 +60,14 @@ bool ObjParser::readVertices(std::ifstream &in, Model &model,
         in >> x;
         in >> y;
         in >> z;
-        model.emplaceVertex(x, y, z);
+        mesh.emplaceVertex(x, y, z);
     } while (in >> token && token == "v");
 
     in.unget();
     return true;
 }
 
-bool ObjParser::readTextures(std::ifstream &in, Model &model,
+bool ObjParser::readTextures(std::ifstream &in, Mesh &mesh,
                              std::string &token) {
     do {
         // skip line for now
@@ -78,8 +77,7 @@ bool ObjParser::readTextures(std::ifstream &in, Model &model,
     return true;
 }
 
-bool ObjParser::readNormals(std::ifstream &in, Model &model,
-                            std::string &token) {
+bool ObjParser::readNormals(std::ifstream &in, Mesh &mesh, std::string &token) {
     do {
         // skip line for now
         in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -88,7 +86,7 @@ bool ObjParser::readNormals(std::ifstream &in, Model &model,
     return true;
 }
 
-bool ObjParser::readFaces(std::ifstream &in, Model &model, std::string &token) {
+bool ObjParser::readFaces(std::ifstream &in, Mesh &mesh, std::string &token) {
     // only vertex data for now
     do {
         unsigned int v1, v2, v3;
@@ -114,8 +112,8 @@ bool ObjParser::readFaces(std::ifstream &in, Model &model, std::string &token) {
         v3 = std::stoi(facePart.substr(
             0, facePart.find('/'))); // Get the first number (vertex index)
 
-        model.emplaceFace(v1, v2, v3); // Add the face to the model with only
-                                       // vertex indices
+        mesh.emplaceFace(v1, v2, v3); // Add the face to the mesh with only
+                                      // vertex indices
 
     } while (in >> token && token == "f");
 
