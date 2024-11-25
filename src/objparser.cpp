@@ -5,7 +5,7 @@ bool ObjParser::loadObj(const std::string &fileName, Mesh &mesh) {
     std::ifstream in;
     in.open(fileName);
     if (in.fail()) { // opening the file failed
-        Logger::Fatal("Could not load the file: ", fileName);
+        Logger::Error("Could not load the file: ", fileName);
         return false;
     }
 
