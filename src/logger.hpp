@@ -9,12 +9,10 @@
 
 /// @brief Enum class representing the different log levels.
 enum LogLevel {
-    Trace = 0,
-    Debug = 1,
-    Info  = 2,
-    Warn  = 3,
-    Error = 4,
-    Fatal = 5
+    Debug = 0,
+    Info  = 1,
+    Warn  = 2,
+    Error = 3,
 };
 
 /// @brief The singelton used for logging.
@@ -57,12 +55,6 @@ public:
     /// @brief Updates the level of logging.
     static void setLevel(LogLevel level) { m_level = level; }
 
-    /// @brief Log at Trace level.
-    template <typename... Args>
-    static void Trace(const std::string &msg, Args... args) {
-        Log("\x1b[30m[Trace]\033[0m", LogLevel::Trace, msg, args...);
-    }
-
     /// @brief Log at Debug level.
     template <typename... Args>
     static void Debug(const std::string &msg, Args... args) {
@@ -85,11 +77,5 @@ public:
     template <typename... Args>
     static void Error(const std::string &msg, Args... args) {
         Log("\x1b[91m[Error]\033[0m", LogLevel::Error, msg, args...);
-    }
-
-    /// @brief Log at Fatal level.
-    template <typename... Args>
-    static void Fatal(const std::string &msg, Args... args) {
-        Log("\x1b[41m[Fatal]\033[0m", LogLevel::Fatal, msg, args...);
     }
 };
