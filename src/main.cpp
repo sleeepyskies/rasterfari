@@ -24,15 +24,5 @@ int main(int argc, char **argv) {
     // init engine and run
     Rasterfari rasterfari(sceneFile);
 
-    /*
-    TGAImage img = TGAImage(600, 600, TGAImage::Format::RGB);
-
-    auto mesh      = Mesh();
-    auto objParser = ObjParser();
-]    objParser.loadObj(faceObj, mesh);
-    auto renderer = Renderer();
-    renderer.fillFaces(mesh, img);
-    */
-
     return 0;
 }

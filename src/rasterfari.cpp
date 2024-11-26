@@ -43,14 +43,6 @@ void Rasterfari::run() {
             if (event.type == SDL_QUIT) running = false; // handle quit
         }
 
-        for (int x = 20; x < 100; x++) {
-            for (int y = 20; y < 100; y++) {
-                uint32_t *pixels = (uint32_t *) imageBuffer.m_buffer->pixels;
-                pixels[y * imageBuffer.m_buffer->pitch / sizeof(uint32_t) + x] =
-                    Color(255).value;
-            }
-        }
-
         // handle rendering
         m_renderer.wireFrame(face, imageBuffer);
 
