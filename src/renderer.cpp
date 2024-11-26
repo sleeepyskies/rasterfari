@@ -1,7 +1,7 @@
 #include "renderer.hpp"
 
-void Renderer::line(int x0, int y0, int x1, int y1, TGAImage &img,
-                    TGAColor color) {
+void Renderer::line(int x0, int y0, int x1, int y1, ImageBuffer &ib,
+                    Color color) {
     bool steep = false;
     if (std::abs(x0 - x1) < std::abs(y0 - y1)) {
         std::swap(x0, y0);
@@ -19,9 +19,9 @@ void Renderer::line(int x0, int y0, int x1, int y1, TGAImage &img,
     int y        = y0;
     for (int x = x0; x <= x1; x++) {
         if (steep) {
-            img.set(y, x, color);
+            ib.pixel(y, x) = color;
         } else {
-            img.set(x, y, color);
+            ib.pixel(x, y) = color;
         }
         error2 += derror2;
         if (error2 > dx) {
@@ -31,8 +31,8 @@ void Renderer::line(int x0, int y0, int x1, int y1, TGAImage &img,
     }
 }
 
-void Renderer::triangle(Vertex3f v1, Vertex3f v2, Vertex3f v3, TGAImage &img,
-                        TGAColor color) {
+void Renderer::triangle(Vertex3f v1, Vertex3f v2, Vertex3f v3, ImageBuffer &ib,
+                        Color color) {
     // order vertices by y value such that v1 has lowest y val, v3 has largest
     if (v1.y() >= v2.y()) {
         Vertex3f temp = v1;
@@ -58,7 +58,7 @@ void Renderer::triangle(Vertex3f v1, Vertex3f v2, Vertex3f v3, TGAImage &img,
     float x2 = v1.x();
 
     for (int yLvl = v1.y(); yLvl <= v2.y(); yLvl++) {
-        line(x1, yLvl, x2, yLvl, img, color);
+        line(x1, yLvl, x2, yLvl, ib, color);
         x1 += slope1;
         x2 += slope2;
     }
@@ -71,18 +71,18 @@ void Renderer::triangle(Vertex3f v1, Vertex3f v2, Vertex3f v3, TGAImage &img,
     float x4 = v3.x();
 
     for (int yLvl = v3.y(); yLvl >= v2.y(); yLvl--) {
-        line(x3, yLvl, x4, yLvl, img, color);
+        line(x3, yLvl, x4, yLvl, ib, color);
         x3 += slope3;
         x4 += slope4;
     }
 }
 
-void Renderer::wireFrame(Mesh &mesh, TGAImage &img) {
-    int W = img.get_width();
-    int H = img.get_height();
+void Renderer::wireFrame(Mesh &mesh, ImageBuffer &ib) {
+    int W = ib.width();
+    int H = ib.height();
 
     // render the mesh, disregarding the z dimension
-    const auto white = TGAColor(255, 255, 255, 255);
+    const auto white = Color(255, 255, 255, 255);
     unsigned int max = mesh.faceCount();
     for (unsigned int i = 0; i < max; i++) {
         Vertex3u face = mesh.iFace(i);
@@ -96,31 +96,28 @@ void Renderer::wireFrame(Mesh &mesh, TGAImage &img) {
              H - (v1.y() + 1) * H / 2.f,
              (v2.x() + 1) * W / 2.f,
              H - (v2.y() + 1) * H / 2.f,
-             img,
+             ib,
              white);
         // from v1 => v3
         line((v1.x() + 1) * W / 2.f,
              H - (v1.y() + 1) * H / 2.f,
              (v3.x() + 1) * W / 2.f,
              H - (v3.y() + 1) * H / 2.f,
-             img,
+             ib,
              white);
         // from v2 => v3
         line((v2.x() + 1) * W / 2.f,
              H - (v2.y() + 1) * H / 2.f,
              (v3.x() + 1) * W / 2.f,
              H - (v3.y() + 1) * H / 2.f,
-             img,
+             ib,
              white);
     }
-
-    img.write_tga_file("output.tga");
 }
 
-void Renderer::fillFaces(Mesh &mesh, TGAImage &img) {
-
-    int H = img.get_height();
-    int W = img.get_width();
+void Renderer::fillFaces(Mesh &mesh, ImageBuffer &ib) {
+    int W = ib.width();
+    int H = ib.height();
 
     int faceMax = mesh.faceCount();
     for (unsigned int i = 0; i < faceMax; i++) {
@@ -139,10 +136,8 @@ void Renderer::fillFaces(Mesh &mesh, TGAImage &img) {
 
         float l = std::min((v1.z() + v2.z() + v3.z()) * 500 / 3.f, 255.f);
 
-        TGAColor c = TGAColor(l);
+        Color c = Color(l);
 
-        triangle(v1, v2, v3, img, c);
+        triangle(v1, v2, v3, ib, c);
     }
-
-    img.write_tga_file("output.tga");
 }

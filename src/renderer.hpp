@@ -1,8 +1,8 @@
 #pragma once
 
+#include "display.hpp"
 #include "mathy.hpp"
 #include "mesh.hpp"
-#include "tgaimage.hpp"
 #include <random>
 
 class Renderer {
@@ -12,12 +12,12 @@ public:
 
     // TODO SORT THIS CLASS OUT
 
-    void line(int x0, int y0, int x1, int y1, TGAImage &img, TGAColor color);
+    void line(int x0, int y0, int x1, int y1, ImageBuffer &ib, Color color);
 
-    void triangle(Vertex3f v1, Vertex3f v2, Vertex3f v3, TGAImage &img,
-                  TGAColor color);
+    void triangle(Vertex3f v1, Vertex3f v2, Vertex3f v3, ImageBuffer &ib,
+                  Color color);
 
-    void wireFrame(Mesh &mesh, TGAImage &img);
+    void wireFrame(Mesh &mesh, ImageBuffer &ib);
 
-    void fillFaces(Mesh &mesh, TGAImage &img);
+    void fillFaces(Mesh &mesh, ImageBuffer &ib);
 };

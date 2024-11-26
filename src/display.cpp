@@ -54,13 +54,20 @@ ImageBuffer::ImageBuffer(Window &window) {
 
 ImageBuffer::~ImageBuffer() { SDL_FreeSurface(m_buffer); }
 
-const uint32_t &ImageBuffer::pixel(int x, int y) {
+void ImageBuffer::ready() const {
+    if (SDL_LockSurface(m_buffer) != 0)
+        Logger::Warn("Failed to lock the SDL surface: ", SDL_GetError());
+}
+
+void ImageBuffer::unReady() const { SDL_UnlockSurface(m_buffer); }
+
+Color &ImageBuffer::pixel(int x, int y) {
     // Compute the address of the pixel in the buffer.
     uint8_t *pixelAddress = (uint8_t *) m_buffer->pixels + y * m_buffer->pitch +
                             x * m_buffer->format->BytesPerPixel;
 
     // Cast the address to a 32-bit integer pointer and return a reference.
-    return *(uint32_t *) pixelAddress;
+    return *(Color *) pixelAddress;
 }
 
 SDL_Surface *ImageBuffer::buffer() { return m_buffer; }

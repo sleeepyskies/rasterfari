@@ -1,3 +1,5 @@
+#pragma once
+
 #include "mathy.hpp"
 #include "mesh.hpp"
 #include <fstream>

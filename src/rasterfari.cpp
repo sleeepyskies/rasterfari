@@ -1,20 +1,20 @@
 #include "rasterfari.hpp"
 
-Rasterfari::Rasterfari()
-    : m_window(Window()), m_imageBuffer(ImageBuffer(m_window)) {
-    Logger::Warn("This has not been done yet!!!! Exiting program!");
-    init();
-
-    run();
-    return;
-}
-
-Rasterfari::Rasterfari(std::string sceneFile)
-    : m_window(Window()), m_imageBuffer(ImageBuffer(m_window)) {
+Rasterfari::Rasterfari(std::string sceneFile = "defaultPath")
+    : m_window(Window()) {
     // TDOD parseScene()
 
     // handle SDL init => returns 0 on success lol
-    init();
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+        Logger::Error("SDL Video could not be initiaized: ", SDL_GetError());
+        SDL_Quit();
+        return;
+    } else {
+        Logger::Info("SDL Video has succesfully been initiaized!");
+    }
+
+    // init other member variables
+    m_renderer = Renderer();
 
     run();
 }
@@ -22,29 +22,39 @@ Rasterfari::Rasterfari(std::string sceneFile)
 Rasterfari::~Rasterfari() { SDL_Quit(); }
 
 void Rasterfari::run() {
-    // todo, create a frameBuffer class/struct
+    // The image buffer used to draw actual images onto, and then render onto
+    // the screen via blitting.
+    ImageBuffer imageBuffer = ImageBuffer(m_window);
+    SDL_Event event; // used to handle any input events
 
-    // loop
-    SDL_Event event;
+    // TDOD Remove this, just used for testing rendering with SDL2
+    ObjParser objParser = ObjParser();
+    Mesh face           = Mesh();
+    objParser.loadObj(
+        "D:/dev/c++ projects/graphics/rasterfari/models/african_head.obj",
+        face);
+
     bool running = true;
     while (running) {
-        // handles quitting
-        // TODO handle more events!! maybe we need an event handler?
+        imageBuffer.ready(); // lock pixels.
+
+        // handle all user input
         while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
+            if (event.type == SDL_QUIT) running = false; // handle quit
+        }
+
+        for (int x = 20; x < 100; x++) {
+            for (int y = 20; y < 100; y++) {
+                uint32_t *pixels = (uint32_t *) imageBuffer.m_buffer->pixels;
+                pixels[y * imageBuffer.m_buffer->pitch / sizeof(uint32_t) + x] =
+                    Color(255).value;
             }
         }
-    }
-}
 
-void Rasterfari::init() {
-    // handle SDL init => returns 0 on success lol
-    if (!SDL_Init(SDL_INIT_VIDEO)) {
-        Logger::Info("SDL Video has succesfully been initiaized!");
-    } else {
-        Logger::Error("SDL Video could not be initiaized: ", SDL_GetError());
-        SDL_Quit();
-        return;
+        // handle rendering
+        m_renderer.wireFrame(face, imageBuffer);
+
+        imageBuffer.unReady(); // unlock pixels
+        m_window.display(imageBuffer);
     }
 }

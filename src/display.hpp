@@ -64,7 +64,7 @@ public:
  * make using SDL2 a little simpler.
  */
 class ImageBuffer {
-private:
+public:
     /// @brief The SDL2 surface that holds the buffer data.
     SDL_Surface *m_buffer;
 
@@ -87,10 +87,15 @@ public:
     /// @brief Destructor for ImageBuffer.
     ~ImageBuffer();
 
+    /// @brief Allows the safe access for reading/writing to the image buffer.
+    void ready() const;
+    /// @brief Stops the safe access for reading/writing to the image buffer.
+    void unReady() const;
+
     /// @brief Returns a reference to the pixel at the given coordinates. Can be
     /// used for quick accesing to avoid overhead when drawing to the
     /// ImageBuffer.
-    const uint32_t &pixel(int x, int y);
+    Color &pixel(int x, int y);
 
     /// @brief Used to return a pointer to the SDL_Surface. Should only be
     /// used for blitting the surface to the window.
