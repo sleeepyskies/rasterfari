@@ -19,6 +19,8 @@ class Rasterfari {
 private:
     /// @brief The window on which everything is rendered!
     Window m_window;
+    /// @brief The buffer used to draw images onto. Is then blitted to window.
+    ImageBuffer m_imageBuffer;
     /// @brief The scene that is being rendered. @todo Add
     // Scene m_scene;
     /// @brief Class for handling all user input. @todo Add
@@ -28,8 +30,8 @@ private:
 
     /// @brief Runs the main loop of the engine.
     void run();
-    /// @brief Handles the initialization of SDL2 within Rasterfari.
-    void initSDL();
+    /// @brief Handles the initialization of member variables.
+    void init();
 
 public:
     /// @brief Default constructor for the engine when no sceneFile is provided.

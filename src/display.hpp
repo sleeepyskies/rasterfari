@@ -1,8 +1,10 @@
 #pragma once
 
 #include "logger.hpp"
-#include "window.hpp"
 #include <SDL.h>
+
+class ImageBuffer;
+class Window;
 
 /**
  * @brief The class used to represent color in Rasterfari. Rasterfari uses the
@@ -47,8 +49,13 @@ public:
     /// @brief Correctly cleans up SDL members.
     ~Window();
 
+    /// @brief Returns the width of the window in pixels.
+    int width() const;
+    /// @brief Returns the height of the window in pixels.
+    int height() const;
+
     /// @brief Used to draw the provided ImageBuffer to the window.
-    const void display(ImageBuffer &imageBuffer);
+    void display(ImageBuffer &imageBuffer);
 };
 
 /**
@@ -61,14 +68,16 @@ private:
     /// @brief The SDL2 surface that holds the buffer data.
     SDL_Surface *m_buffer;
 
+    // TODO - maybe put these in a macro?
+
     /// @brief The red mask, indictaes which bits are used to store red data.
-    uint32_t rMask = ;
+    uint32_t rMask = 0xFF000000;
     /// @brief The green mask, indictaes which bits store green data.
-    uint32_t gMask;
+    uint32_t gMask = 0x00FF0000;
     /// @brief The blue mask, indictaes which bits are used to store blue data.
-    uint32_t bMask;
+    uint32_t bMask = 0x0000FF00;
     /// @brief The alpha mask, indictaes which bits are store alpha data.
-    uint32_t aMask;
+    uint32_t aMask = 0x000000FF;
 
 public:
     /// @brief Constructor for the ImageBuffer. Essentially copies the
@@ -89,7 +98,6 @@ public:
 
     /// @brief Returns the height of this ImageBuffer in pixels.
     int height() const;
-
     /// @brief Returns the width of this ImageBuffer in pixels.
     int width() const;
 };
