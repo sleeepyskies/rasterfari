@@ -2,6 +2,7 @@
 
 #define SDL_MAIN_HANDLED
 
+#include "display.hpp"
 #include "logger.hpp"
 #include "renderer.hpp"
 #include <SDL.h>
@@ -17,10 +18,7 @@
 class Rasterfari {
 private:
     /// @brief The window on which everything is rendered!
-    /// @todo Move this to its own struct/class?
-    SDL_Window *m_window = nullptr;
-    /// @brief The SDL renderer. @todo Combine with m_window into class.
-    SDL_Renderer *m_sdlrenderer;
+    Window m_window;
     /// @brief The scene that is being rendered. @todo Add
     // Scene m_scene;
     /// @brief Class for handling all user input. @todo Add

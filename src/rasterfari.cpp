@@ -38,18 +38,10 @@ Rasterfari::Rasterfari(std::string sceneFile) {
         }
     }
 
-    SDL_BlitSurface(frameBuffer, nullptr, screen, nullptr);
-    SDL_UpdateWindowSurface(m_window);
-
     run();
 }
 
-Rasterfari::~Rasterfari() {
-    SDL_DestroyWindow(m_window);
-    SDL_DestroyRenderer(m_sdlrenderer);
-
-    SDL_Quit();
-}
+Rasterfari::~Rasterfari() { SDL_Quit(); }
 
 void Rasterfari::run() {
     // todo, create a frameBuffer class/struct
@@ -85,15 +77,4 @@ void Rasterfari::initSDL() {
                                 600,
                                 600,
                                 0);
-    if (!m_window) {
-        Logger::Error("SDL window could not be created: ", SDL_GetError());
-        return;
-    }
-
-    // sdl renderer creation
-    m_sdlrenderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-    if (!m_sdlrenderer) {
-        Logger::Error("SDL renderer could not be created: ", SDL_GetError());
-        return;
-    }
 }
