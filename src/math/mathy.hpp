@@ -1,6 +1,15 @@
+/**
+ * @file This file is used as an umbrella file for all other math classes
+ * defined in Rasterfari. It avoids many import statements.
+ */
+
 #pragma once
 
-#include <math.h>
+#include "matrix.hpp"
+#include "point.hpp"
+#include "utils.hpp"
+#include "vector.hpp"
+#include "vertex.hpp"
 
 // Vectors
 
@@ -28,18 +37,11 @@ public:
 
     Vector3(const Vector3<Type> &other) = default;
 
-    // Get x-coord
-    Type x() const { return m_x; }
-    // Get y-coord
-    Type y() const { return m_y; }
-    // Get z-coord
-    Type z() const { return m_y; }
-    // Set x-coord
-    void setX(const Type x) { m_x = x; }
-    // Set y-coord
-    void setY(const Type y) { m_y = y; }
-    // Set z-coord
-    void setZ(const Type y) { m_z = z; }
+    // Getters and Setters
+
+    Type &x() const { return &m_x; }
+    Type &y() const { return &m_y; }
+    Type &z() const { return &m_z; }
 
     /// @brief Find the length of this vector
     Type length() { return std::sqrt(m_x * m_x + m_y * m_y + m_z * m_z); }
@@ -113,14 +115,10 @@ public:
     // Default constructor for 2D points, inits x and y to 0 if no params given
     explicit Vertex2(Type x = Type(0), Type y = Type(0)) : m_x(x), m_y(y) {}
 
-    // Get x-coord
-    Type x() const { return m_x; }
-    // Get y-coord
-    Type y() const { return m_y; }
-    // Set x-coord
-    void setX(const Type x) { m_x = x; }
-    // Set y-coord
-    void setY(const Type y) { m_y = y; }
+    // Getters and Setters
+
+    Type &x() const { return &m_x; }
+    Type &y() const { return &m_y; }
 
     // Operator overloads
 
@@ -159,18 +157,10 @@ public:
     Vertex3(const Vertex3 &other)
         : m_x(other.x()), m_y(other.y()), m_z(other.z()) {}
 
-    // Get x-coord
-    Type x() const { return m_x; }
-    // Get y-coord
-    Type y() const { return m_y; }
-    // Get z-coord
-    Type z() const { return m_z; }
-    // Set x-coord
-    void setX(const Type x) { m_x = x; }
-    // Set y-coord
-    void setY(const Type y) { m_y = y; }
-    // Set z-coord
-    void setZ(const Type z) { m_z = z; }
+    // Getters and Setters
+    Type &x() const { return &m_x; }
+    Type &y() const { return &m_y; }
+    Type &z() const { return &m_z; }
 
     // Operator overloads
 

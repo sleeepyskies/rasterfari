@@ -1,3 +1,8 @@
+/**
+ * @file rasterfari.hpp
+ * @brief The main engine of the rasterizer
+ */
+
 #pragma once
 
 #define SDL_MAIN_HANDLED
@@ -9,10 +14,7 @@
 #include "renderer.hpp"
 #include <SDL.h>
 
-/**
- * @file rasterfari.hpp
- * @brief The main engine of the rasterizer
- */
+namespace Rasterfari {
 
 /**
  * @brief The main part of the Rasterfari raserization engine.
@@ -39,3 +41,4 @@ public:
     /// @brief Destructor for the Rasterfari engine. Properly ends the engine.
     ~Rasterfari();
 };
+} // namespace Rasterfari

@@ -6,6 +6,7 @@
  * TODO: add documentation
  */
 
+namespace Rasterfari {
 class Camera {
 private:
     Point3f m_position;
@@ -15,3 +16,5 @@ public:
     Camera();
     Camera(Point3f position, Vector3f direction);
 };
+
+} // namespace Rasterfari

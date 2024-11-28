@@ -5,6 +5,8 @@
 #include "mesh.hpp"
 #include <random>
 
+namespace Rasterfari {
+
 class Renderer {
 private:
 public:
@@ -21,3 +23,5 @@ public:
 
     void fillFaces(Mesh &mesh, ImageBuffer &ib);
 };
+
+} // namespace Rasterfari

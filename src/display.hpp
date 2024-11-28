@@ -5,7 +5,7 @@
 
 class ImageBuffer;
 class Window;
-
+namespace Rasterfari {
 /**
  * @brief The class used to represent color in Rasterfari. Rasterfari uses the
  * RGBA fomat, where each color is 32-bits.
@@ -106,3 +106,5 @@ public:
     /// @brief Returns the width of this ImageBuffer in pixels.
     int width() const;
 };
+
+} // namespace Rasterfari

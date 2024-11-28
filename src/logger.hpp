@@ -7,6 +7,8 @@
 #include <mutex>
 #include <string>
 
+namespace Rasterfari {
+
 /// @brief Enum class representing the different log levels.
 enum LogLevel {
     Debug = 0,
@@ -79,3 +81,5 @@ public:
         Log("\x1b[91m[Error]\033[0m", LogLevel::Error, msg, args...);
     }
 };
+
+} // namespace Rasterfari

@@ -1,4 +1,4 @@
-#include "camera.cpp"
+#include "camera.hpp"
 
 Camera::Camera() {
     m_position  = Point3f(0.f);

@@ -8,6 +8,7 @@
 #include <logger.hpp>
 #include <sstream>
 #include <string>
+namespace Rasterfari {
 
 /**
  * Parser for reading in .obj files.
@@ -27,3 +28,4 @@ public:
     // Reads the data from the given file and loads into the provided mesh.
     bool loadObj(const std::string &filename, Mesh &mesh);
 };
+} // namespace Rasterfari
