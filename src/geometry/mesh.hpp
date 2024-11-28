@@ -1,13 +1,13 @@
 #pragma once
 
-#include "item.hpp"
 #include "mathy.hpp"
+#include "scene.hpp"
 #include <vector>
 
 /**
  * A struct representing some model consisting of triangles.
  */
-struct Mesh : public Item {
+struct Mesh : public StaticObject {
 private:
     // A vector holding all vertices in the model.
     std::vector<Vertex3f> m_vertices;
