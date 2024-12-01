@@ -21,19 +21,20 @@ private:
 
 public:
     // Default constructor for 3D vectors, inits x, y, z to 0 if no params given
-    explicit Vector3(Type x = Type(0), Type y = Type(0), Type z = Type(0))
+    Vector3(Type x = Type(0), Type y = Type(0), Type z = Type(0))
         : m_x(x), m_y(y), m_z(z) {}
-
-    Vector3(const Vector3<Type> &other) = default;
 
     // Getters and Setters
 
-    Type &x() const { return &m_x; }
-    Type &y() const { return &m_y; }
-    Type &z() const { return &m_z; }
+    const Type &x() const { return m_x; }
+    const Type &y() const { return m_y; }
+    const Type &z() const { return m_z; }
+    Type &x() { return m_x; }
+    Type &y() { return m_y; }
+    Type &z() { return m_z; }
 
     /// @brief Find the length of this vector
-    Type length() { return std::sqrt(m_x * m_x + m_y * m_y + m_z * m_z); }
+    Type length() const { return std::sqrt(m_x * m_x + m_y * m_y + m_z * m_z); }
 
     /// @brief Normalizes the vector in place
     void makeNormal() {
@@ -80,6 +81,46 @@ public:
     Vector3 operator/(const Type value) const {
         return Vector3<Type>(
             this->x() / value, this->y() / value, this->z() / value);
+    }
+    Vector3 operator+=(const Vector3 &other) const {
+        m_x += other.x();
+        m_y += other.y();
+        m_z += other.z();
+    }
+    Vector3 operator-=(const Vector3 &other) const {
+        m_x -= other.x();
+        m_y -= other.y();
+        m_z -= other.z();
+    }
+    Vector3 operator*=(const Vector3 &other) const {
+        m_x *= other.x();
+        m_y *= other.y();
+        m_z *= other.z();
+    }
+    Vector3 operator/=(const Vector3 &other) const {
+        m_x /= other.x();
+        m_y /= other.y();
+        m_z /= other.z();
+    }
+    Vector3 operator+=(const Type value) const {
+        m_x += value;
+        m_y += value;
+        m_z += value;
+    }
+    Vector3 operator-=(const Type value) const {
+        m_x -= value;
+        m_y -= value;
+        m_z -= value;
+    }
+    Vector3 operator*=(const Type value) const {
+        m_x *= value;
+        m_y *= value;
+        m_z *= value;
+    }
+    Vector3 operator/=(const Type value) const {
+        m_x /= value;
+        m_y /= value;
+        m_z /= value;
     }
     bool operator==(const Vector3 &other) const {
         return this->x() == other->x() && this->y() == other->y() &&
