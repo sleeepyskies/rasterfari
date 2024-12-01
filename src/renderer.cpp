@@ -1,5 +1,7 @@
 #include "renderer.hpp"
 
+namespace Rasterfari {
+
 void Renderer::line(int x0, int y0, int x1, int y1, ImageBuffer &ib,
                     Color color) {
     bool steep = false;
@@ -127,12 +129,12 @@ void Renderer::fillFaces(Mesh &mesh, ImageBuffer &ib) {
         Vertex3f v2 = mesh.iVertex(face.y());
         Vertex3f v3 = mesh.iVertex(face.z());
 
-        v1.setX((v1.x() + 1) * W / 2);
-        v2.setX((v2.x() + 1) * W / 2);
-        v3.setX((v3.x() + 1) * W / 2);
-        v1.setY(H - (v1.y() + 1) * H / 2);
-        v2.setY(H - (v2.y() + 1) * H / 2);
-        v3.setY(H - (v3.y() + 1) * H / 2);
+        v1.x() = ((v1.x() + 1) * W / 2);
+        v2.x() = ((v2.x() + 1) * W / 2);
+        v3.x() = ((v3.x() + 1) * W / 2);
+        v1.y() = (H - (v1.y() + 1) * H / 2);
+        v2.y() = (H - (v2.y() + 1) * H / 2);
+        v3.y() = (H - (v3.y() + 1) * H / 2);
 
         float l = std::min((v1.z() + v2.z() + v3.z()) * 500 / 3.f, 255.f);
 
@@ -141,3 +143,4 @@ void Renderer::fillFaces(Mesh &mesh, ImageBuffer &ib) {
         triangle(v1, v2, v3, ib, c);
     }
 }
+} // namespace Rasterfari

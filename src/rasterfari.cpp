@@ -1,5 +1,7 @@
 #include "rasterfari.hpp"
 
+namespace Rasterfari {
+
 Rasterfari::Rasterfari(std::string sceneFile = "defaultPath")
     : m_window(Window()) {
     // TDOD parseScene()
@@ -50,3 +52,4 @@ void Rasterfari::run() {
         m_window.display(imageBuffer);
     }
 }
+} // namespace Rasterfari

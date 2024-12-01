@@ -1,5 +1,7 @@
 #include "mesh.hpp"
 
+namespace Rasterfari {
+
 Mesh::Mesh() {}
 
 Vertex3u Mesh::iFace(unsigned int index) { return m_faces[index]; }
@@ -16,3 +18,5 @@ void Mesh::emplaceFace(unsigned int v1, unsigned int v2, unsigned int v3) {
 }
 
 unsigned int Mesh::faceCount() { return m_faces.size(); }
+
+} // namespace Rasterfari

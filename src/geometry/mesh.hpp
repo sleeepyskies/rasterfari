@@ -4,6 +4,8 @@
 #include "scene.hpp"
 #include <vector>
 
+namespace Rasterfari {
+
 /**
  * A struct representing some model consisting of triangles.
  */
@@ -33,3 +35,4 @@ public:
     // Returns the total number of faces in the model.
     unsigned int faceCount();
 };
+} // namespace Rasterfari

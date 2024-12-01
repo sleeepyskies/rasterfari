@@ -1,8 +1,8 @@
-#include "objparser.hpp"
+#include "logger.hpp"
 #include "rasterfari.hpp"
-#include "renderer.hpp"
 #include <string>
 
+namespace Rasterfari {
 /**
  * Entry point of Rasterfari.
  */
@@ -17,12 +17,13 @@ int main(int argc, char **argv) {
 
     // read scene file from command line args
     std::string sceneFile =
-        (argc > 1)
-            ? argv[1]
-            : "D:/dev/c++ projects/graphics/rasterfari/models/african_head.obj";
+        (argc > 1) ? argv[1]
+                   : "D:/dev/c++ "
+                     "projects/graphics/rasterfari/models/african_head.obj";
 
     // init engine and run
     Rasterfari rasterfari(sceneFile);
 
     return 0;
 }
+} // namespace Rasterfari

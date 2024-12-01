@@ -1,5 +1,7 @@
 #include "objparser.hpp"
 
+namespace Rasterfari {
+
 bool ObjParser::loadObj(const std::string &fileName, Mesh &mesh) {
     // create a new ifstream to read from .obj file
     std::ifstream in;
@@ -119,3 +121,4 @@ bool ObjParser::readFaces(std::ifstream &in, Mesh &mesh, std::string &token) {
 
     return true;
 }
+} // namespace Rasterfari

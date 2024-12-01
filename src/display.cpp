@@ -1,5 +1,7 @@
 #include "display.hpp"
 
+namespace Rasterfari {
+
 Window::Window() {
     // init SDL_Window
     // TODO: clean this up, define constants or something
@@ -107,3 +109,4 @@ SDL_Surface *ImageBuffer::buffer() { return m_buffer; }
 int ImageBuffer::width() const { return m_buffer->w; }
 
 int ImageBuffer::height() const { return m_buffer->h; }
+} // namespace Rasterfari

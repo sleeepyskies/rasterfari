@@ -29,6 +29,7 @@ file(GLOB SOURCES src/*.h src/*.cpp)
 file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADERS ${CMAKE_SOURCE_DIR}/src/*.hpp)
 include_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/geometry)
+include_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/math)
 
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

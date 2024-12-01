@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+namespace Rasterfari {
+
 /**
  * TDOD: Add documentation to this file!!!
  */
@@ -25,3 +27,4 @@ public:
 
     void addDynamicObject();
 };
+} // namespace Rasterfari
