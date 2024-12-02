@@ -13,7 +13,15 @@
 
 namespace Rasterfari {
 
-// Vertices
+/// Typedefs for different mathematical structures.
+
+using Vector3f = Vector3<float>;        // 3D float vector
+using Vector3i = Vector3<int>;          // 3D int vector
+using Vector3u = Vector3<unsigned int>; // 3D unsigned int vector
+
+using Vector2f = Vector2<float>;        // 2D float vector
+using Vector2i = Vector2<int>;          // 2D int vector
+using Vector2u = Vector2<unsigned int>; // 2D unsigned int vector
 
 /**
  * A general class representing 2D vertices.
