@@ -3,9 +3,9 @@
 #include "logger.hpp"
 #include <SDL.h>
 
+namespace Rasterfari {
 class ImageBuffer;
 class Window;
-namespace Rasterfari {
 /**
  * @brief The class used to represent color in Rasterfari. Rasterfari uses the
  * RGBA fomat, where each color is 32-bits.

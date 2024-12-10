@@ -2,8 +2,7 @@
 
 namespace Rasterfari {
 
-Rasterfari::Rasterfari(std::string sceneFile = "defaultPath")
-    : m_window(Window()) {
+Rasterfari::Rasterfari(std::string sceneFile) : m_window(Window()) {
     // TDOD parseScene()
 
     // handle SDL init => returns 0 on success lol

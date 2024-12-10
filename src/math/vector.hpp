@@ -1,8 +1,9 @@
 /**
  * @file This file holds all vector specfic definitions and operations.
  */
-
 #pragma once
+
+#include <cmath>
 
 namespace Rasterfari {
 
@@ -15,8 +16,11 @@ private:
     Type m_x, m_y; // data
 
 public:
-    // Default constructor for 3D vectors, inits x, y, z to 0 if no params given
-    Vector2(Type x = Type(0), Type y = Type(0)) : m_x(x), m_y(y) {}
+    /// @brief Default constructor for 3D vectors, inits x, y
+    Vector2(Type x, Type y) : m_x(x), m_y(y) {}
+
+    /// @brief Initializes all data members to val
+    Vector2(Type val) : m_x(val), m_y(val) {}
 
     // Getters and Setters
 
@@ -34,11 +38,18 @@ public:
         return Vector2(m_x * invLength, m_y * invLength);
     }
 
+    /// @brief Normalizes this vector in place.
+    void makeNormal() {
+        Type invLength = (Type) 1 / (*this).length();
+        this->m_x      = m_x * invLength;
+        this->m_y      = m_y * invLength;
+    }
+
     /// @brief Returns the sum of this vectors components.
     Type sum() const { return m_x + m_y; }
 
     /// @brief Computes the dot product between this vector and other.
-    Type dot(const Vector2 &other) const { return (*this * other).sum() }
+    Type dot(const Vector2 &other) const { return (*this * other).sum(); }
 
     // Operator overloads
 
@@ -115,9 +126,12 @@ private:
     Type m_x, m_y, m_z; // data
 
 public:
-    // Default constructor for 3D vectors, inits x, y, z to 0 if no params given
-    Vector3(Type x = Type(0), Type y = Type(0), Type z = Type(0))
-        : m_x(x), m_y(y), m_z(z) {}
+    /// @brief Default constructor for 3D vectors, inits x, y, z
+    /// params given.
+    Vector3(Type x, Type y, Type z) : m_x(x), m_y(y), m_z(z) {}
+
+    /// @brief Constructor that initializes all data members to val.
+    Vector3(Type val) : m_x(val), m_y(val), m_z(val) {}
 
     // Getters and Setters
 
@@ -137,11 +151,31 @@ public:
         return Vector3(m_x * invLength, m_y * invLength, m_z * invLength);
     }
 
+    /// @brief Normalizes this vector in place.
+    void makeNormal() {
+        Type invLength = (Type) 1 / (*this).length();
+        this->m_x      = m_x * invLength;
+        this->m_y      = m_y * invLength;
+        this->m_z      = m_z * invLength;
+    }
+
     /// @brief Returns the sum of this vectors components.
     Type sum() const { return m_x + m_y + m_z; }
 
     /// @brief Computes the dot product between this vector and other.
-    Type dot(const Vector3 &other) const { return (*this * other).sum() }
+    Type dot(const Vector3 &other) const { return (*this * other).sum(); }
+
+    /// @brief Computes the cross product between this vector and other.
+    Vector3 cross(const Vector3 &other) const {
+        // a2 * b3 - a3 * b2
+        Type a = this->y() * other.z() - this->z() * other.y();
+        // a3 * b1 - a1 * b3
+        Type b = this->z() * other.a() - this->x() * other.z();
+        // a1 * b2 - a2 - b1
+        Type c = this->x() * other.y() - this->y() * other.x();
+
+        return Vector3(a, b, c);
+    }
 
     // Operator overloads
 

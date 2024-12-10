@@ -4,6 +4,8 @@ project(Rasterfari)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_OSX_ARCHITECTURES "arm64")
+
 # set output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -24,8 +26,8 @@ include_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/math)
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 # Manually specify SDL2 include directory and libraries
-set(SDL2_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/sdl2")
-set(SDL2_LIBRARIES "${CMAKE_SOURCE_DIR}/libs/libSDL2.a;${CMAKE_SOURCE_DIR}/libs/libSDL2main.a")
+set(SDL2_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/SDL2")
+set(SDL2_LIBRARIES "${CMAKE_SOURCE_DIR}/libs/SDL2/libSDL2.a;${CMAKE_SOURCE_DIR}/libs/SDL2/libSDL2main.a")
 
 # Include SDL2 headers
 include_directories(${SDL2_INCLUDE_DIR})

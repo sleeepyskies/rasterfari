@@ -45,7 +45,7 @@ private:
 
             // log it please :))
             std::cout << indicator << " " << msg;
-            (std::cout << ... << args);
+            ((std::cout << ' ' << args), ...);
             std::cout << std::endl;
         }
     }
